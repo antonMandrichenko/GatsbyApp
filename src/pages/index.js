@@ -1,15 +1,24 @@
 import React from "react"
 import { Link } from "gatsby"
 import { useSelector, useDispatch } from "react-redux"
+import { makeStyles } from "@material-ui/core/styles"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+import Button from "@material-ui/core/Button"
 import { userActions } from "../store/actions/user.actions"
 
-const IndexPage = (props) => {
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1),
+  }
+}))
+
+const IndexPage = props => {
   const token = useSelector(state => state.user.token)
   const dispatch = useDispatch()
+  const classes = useStyles()
   return (
     <Layout>
       <SEO title="Home" />
@@ -20,13 +29,16 @@ const IndexPage = (props) => {
         <Image />
       </div>
       <div>{token}</div>
-      <button
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
         onClick={() => {
           dispatch(userActions.loginSuccess("Annnnnnn"))
         }}
       >
         Get token
-      </button>
+      </Button>
       <Link to="/page-2/">Go to page 2</Link>
     </Layout>
   )
