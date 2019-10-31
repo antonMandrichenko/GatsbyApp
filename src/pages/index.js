@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const IndexPage = props => {
+const IndexPage = () => {
   const token = useSelector(state => state.user.token)
   const dispatch = useDispatch()
   const classes = useStyles()
