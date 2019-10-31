@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndexPage render 1`] = `
+<DocumentFragment>
+  <div
+    style="margin: 0px auto; max-width: 960px; padding: 0px 1.0875rem 1.45rem 1.0875rem;"
+  >
+    <main>
+      <div>
+        Annnnnnn
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-1 MuiButton-containedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Get token
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <a
+        href="/page-2/"
+      >
+        Go to page 2
+      </a>
+    </main>
+    <footer>
+      © 2019, Built with 
+      <a
+        href="https://www.gatsbyjs.org"
+      >
+        Gatsby
+      </a>
+    </footer>
+  </div>
+</DocumentFragment>
+`;
