@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { BackendService, Ticket } from "../../backend.service"
 
-
 const backend = new BackendService()
 
 export type ticketsTypes = {
@@ -39,7 +38,9 @@ function TicketProvider(props: Props) {
   const [tickets, setTickets] = useState<ticketsTypes[]>([])
   const [users, setUsers] = useState<usersTypes[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [selectedTicket, setSelectedTicket] = useState<ticketsTypes | null>(null)
+  const [selectedTicket, setSelectedTicket] = useState<ticketsTypes | null>(
+    null
+  )
 
   const getDataFromApi = async () => {
     setIsLoading(true)
@@ -57,12 +58,10 @@ function TicketProvider(props: Props) {
   }, [])
 
   const deleteTicket = async (id: number) => {
-    console.log("delete", id)
     setTickets(tickets.filter(ticket => ticket.id !== id))
-    console.log("ticket deleted")
   }
 
-  const addTicket = async (opt: Pick<Ticket, 'description'>) => {
+  const addTicket = async (opt: Pick<Ticket, "description">) => {
     setIsLoading(true)
     await backend.newTicket(opt)
     setIsLoading(false)
@@ -71,40 +70,47 @@ function TicketProvider(props: Props) {
   }
 
   const updateTicket = (opt: Ticket) => {
-    if(opt.description === "") {
-      return;
+    if (opt.description === "") {
+      return
     }
     const findTicket = tickets.find(ticket => ticket.id === opt.id)
-    if(findTicket) {
+    if (findTicket) {
       findTicket.description = opt.description
-      setTickets(tickets.map(ticket => {
-        if(ticket.id === findTicket.id) {
-          return findTicket;
-        }
-        return ticket;
-      }))
+      setTickets(
+        tickets.map(ticket => {
+          if (ticket.id === findTicket.id) {
+            return findTicket
+          }
+          return ticket
+        })
+      )
     }
   }
 
   const setTicketId = (ticket: ticketsTypes) => {
-    console.log("setId")
     setSelectedTicket(ticket)
+    console.log(tickets)
   }
 
   const setCompleted = async (opt: ticketsTypes) => {
-    console.log("completed", opt)
     await backend.complete(opt)
     const findTicket = tickets.find(ticket => ticket.id === opt.id)
-    if(findTicket) {
+    if (findTicket) {
       findTicket.completed = opt.completed
-      setTickets(tickets.map(ticket => {
-        if(ticket.id === findTicket.id) {
-          return findTicket;
-        }
-        return ticket;
-      }))
+      setTickets(
+        tickets.map(ticket => {
+          if (ticket.id === findTicket.id) {
+            return findTicket
+          }
+          return ticket
+        })
+      )
     }
-    console.log(tickets)
+  }
+
+  const sortBy = (callback: Function) => {
+    const sortArr = tickets.sort(callback).map((item:ticketsTypes) => item)
+    setTickets(sortArr)
   }
 
   return (
@@ -118,7 +124,8 @@ function TicketProvider(props: Props) {
         updateTicket,
         selectedTicket,
         setTicketId,
-        setCompleted
+        setCompleted,
+        sortBy,
       }}
     >
       {children}

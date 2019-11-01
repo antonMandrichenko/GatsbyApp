@@ -4,12 +4,10 @@ import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import Button from "@material-ui/core/Button"
 import TicketInList from "./ticketInList"
-import TicketContext, {
-  usersTypes,
-  ticketsTypes,
-} from "../context/TicketContext"
+import TicketContext from "../context/TicketContext"
 import LoadingData from "./LoadingData"
 import UpdateTicket from "./UpdateTicket"
+import SortBy from "./SortBy"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,7 +35,8 @@ export default function TicketsList() {
         addTicket,
         updateTicket,
         setTicketId,
-        setCompleted
+        setCompleted,
+        sortBy
       }) => (
         <List className={classes.root}>
           <UpdateTicket
@@ -46,10 +45,12 @@ export default function TicketsList() {
             text="added"
             addedButton={addedButton}
           />
-          {(isLoading && !tickets.length) ? (
+          <SortBy sortBy={sortBy}/>
+          {isLoading && !tickets.length ? (
             <LoadingData />
           ) : (
-            tickets && tickets.map(ticket => {
+            tickets &&
+            tickets.map(ticket => {
               return (
                 <ListItem key={ticket.id}>
                   <TicketInList
