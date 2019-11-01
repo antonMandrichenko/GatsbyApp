@@ -1,1 +1,6 @@
-export { default as wrapRootElement } from './src/store/ReduxProvider';
+import React from "react"
+import { TicketProvider } from "./src/context/TicketContext"
+
+export const wrapRootElement = ({ element }) => (
+  <TicketProvider>{element} </TicketProvider>
+)
