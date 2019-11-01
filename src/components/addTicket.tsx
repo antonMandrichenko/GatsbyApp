@@ -1,43 +1,93 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import TicketInList from "./ticketInList"
+import Modal from "@material-ui/core/Modal"
+import Backdrop from "@material-ui/core/Backdrop"
+import Fade from "@material-ui/core/Fade"
+import Button from "@material-ui/core/Button"
+import DescriptionInput from "../components/DescriptionInput"
+import LoadingData from "./LoadingData"
+
+type AddTicketTypes = {
+  addTicket: Function
+  isLoading: boolean
+}
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
     backgroundColor: theme.palette.background.paper,
+    border: "1px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    height: 200,
+    width: 250
   },
 }))
 
-export default function AddTicket() {
+export default function AddTicket({ addTicket, isLoading }: AddTicketTypes) {
   const classes = useStyles()
-  const [checked, setChecked] = React.useState([1])
+  const [open, setOpen] = React.useState(false)
+  const [inputText, setInputText] = React.useState("")
 
-  const handleToggle = value => () => {
-    const currentIndex = checked.indexOf(value)
-    const newChecked = [...checked]
+  const handleOpen = () => {
+    setOpen(true)
+  }
 
-    if (currentIndex === -1) {
-      newChecked.push(value)
-    } else {
-      newChecked.splice(currentIndex, 1)
-    }
+  const handleClose = () => {
+    setOpen(false)
+  }
 
-    setChecked(newChecked)
+  const addedTicketAndClose = async () => {
+    await addTicket({ description: inputText })
+    setOpen(false)
+  }
+
+  const enterText = (e: React.MouseEvent<HTMLElement>) => {
+    setInputText(e.target.value)
   }
 
   return (
-    <List className={classes.root}>
-      {[0, 1, 2, 3].map(value => {
-        const labelId = `checkbox-list-secondary-label-${value}`
-        return (
-          <ListItem key={value} button>
-            <TicketInList />
-          </ListItem>
-        )
-      })}
-    </List>
+    <div>
+      <Button variant="contained" color="secondary" onClick={handleOpen}>
+        Add ticket
+      </Button>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            {isLoading ? (
+              <LoadingData />
+            ) : (
+              <React.Fragment>
+                <h2 id="modal-title">Added ticket</h2>
+                <DescriptionInput enterText={enterText} />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={addedTicketAndClose}
+                  disabled={!Boolean(inputText)}
+                >
+                  Add new ticket
+                </Button>
+              </React.Fragment>
+            )}
+          </div>
+        </Fade>
+      </Modal>
+    </div>
   )
 }

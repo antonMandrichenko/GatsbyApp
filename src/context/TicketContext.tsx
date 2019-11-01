@@ -39,22 +39,33 @@ function TicketProvider(props: Props) {
   const [users, setUsers] = useState<usersTypes[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  useEffect(() => {
-    const getData = async () => {
-      const ticketsData = await backend.tickets()
-      const usersData = await backend.users()
-      if (ticketsData && usersData) {
-        setIsLoading(false)
-      }
-      setTickets(ticketsData)
-      setUsers(usersData)
+  const getDataFromApi = async () => {
+    setIsLoading(true)
+    const ticketsData = await backend.tickets()
+    const usersData = await backend.users()
+    if (ticketsData && usersData) {
+      setIsLoading(false)
     }
-    getData()
+    setTickets(ticketsData)
+    setUsers(usersData)
+  }
+
+  useEffect(() => {
+    getDataFromApi()
   }, [])
 
-  const deleteTicket = (id: number) => {
+  const deleteTicket = async (id: number) => {
     console.log("delete", id)
     setTickets(tickets.filter(ticket => ticket.id !== id))
+    console.log("ticket deleted")
+  }
+
+  const addTicket = async (opt: object) => {
+    setIsLoading(true)
+    await backend.newTicket(opt)
+    setIsLoading(false)
+    console.log("added")
+    getDataFromApi()
   }
 
   return (
@@ -64,6 +75,7 @@ function TicketProvider(props: Props) {
         users,
         isLoading,
         deleteTicket,
+        addTicket,
       }}
     >
       {children}

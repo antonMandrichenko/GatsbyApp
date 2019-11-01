@@ -1,7 +1,6 @@
 import React, { FunctionComponent, Component } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import IconButton from "@material-ui/core/IconButton"
-import { ticketsTypes, usersTypes } from "../context/TicketContext"
 
 const useStyles = makeStyles({
   card: {

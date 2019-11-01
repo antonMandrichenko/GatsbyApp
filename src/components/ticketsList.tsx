@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem"
 import TicketInList from "./ticketInList"
 import TicketContext from "../context/TicketContext"
 import LoadingData from "./LoadingData"
+import AddTicket from "./addTicket"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,9 +19,10 @@ export default function TicketsList() {
 
   return (
     <TicketContext.Consumer>
-      {({ tickets, isLoading, users, deleteTicket }) => (
+      {({ tickets, isLoading, users, deleteTicket, addTicket }) => (
         <List className={classes.root}>
-          {isLoading ? (
+          <AddTicket addTicket={addTicket} isLoading={isLoading}/>
+          {isLoading && !tickets && !users ? (
             <LoadingData />
           ) : (
             tickets.map(ticket => {
@@ -35,6 +37,7 @@ export default function TicketsList() {
               )
             })
           )}
+          {isLoading && tickets.length > 0 && <LoadingData />}
         </List>
       )}
     </TicketContext.Consumer>

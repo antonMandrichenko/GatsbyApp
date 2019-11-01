@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 type TicketInListProps = {
   ticket: ticketsTypes
   users: Array<usersTypes>
-  deleteTicket: CallableFunction
+  deleteTicket: Function
 }
 
 export default function TicketInList({ ticket, users, deleteTicket }: TicketInListProps) {
