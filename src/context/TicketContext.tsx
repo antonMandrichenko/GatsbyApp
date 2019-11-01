@@ -91,7 +91,6 @@ function TicketProvider(props: Props) {
       setIsLoading(true)
       await backend.newTicket(opt)
       setIsLoading(false)
-      console.log("added")
       getDataFromApi()
     } catch (err) {
       setError(err.message)

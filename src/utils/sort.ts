@@ -1,6 +1,5 @@
 import {ticketsTypes} from "../context/TicketContext"
 export const sortArrayByNameUp = (a:ticketsTypes , b: ticketsTypes) => {
-    console.log(a, b)
     if (a.description > b.description) {
       return 1;
     }

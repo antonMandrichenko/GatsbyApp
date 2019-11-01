@@ -27,7 +27,6 @@ export default function SelectAssign({
 }: SelectAssignTypes) {
   const classes = useStyles()
   const assignedUser = users.filter(user => user.id === assignedId)[0]
-  console.log(assignedUser)
   const [personName, setPersonName] = React.useState(
     assignedUser ? assignedUser.name : ""
   )

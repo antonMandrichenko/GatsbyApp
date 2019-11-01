@@ -47,7 +47,6 @@ export default function UpdateTicket({
   const [inputText, setInputText] = React.useState("")
 
   const handleOpen = () => {
-    console.log("open")
     setOpen(true)
   }
 
