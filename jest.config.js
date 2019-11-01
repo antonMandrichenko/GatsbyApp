@@ -13,4 +13,6 @@ module.exports = {
     },
     testURL: `http://localhost`,
     setupFiles: [`<rootDir>/loadershim.js`],
+    moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+    preset: "jest-preset-gatsby/typescript" 
   }

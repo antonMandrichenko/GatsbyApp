@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndexPage render 1`] = `
+<DocumentFragment>
+  <header
+    class="MuiPaper-root MuiPaper-elevation4 MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary"
+  >
+    <div
+      class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-h6"
+      >
+        <a
+          class="makeStyles-title-3"
+          href="/"
+        >
+          Tickets app
+        </a>
+      </h6>
+    </div>
+  </header>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
+  >
+    <div
+      class="MuiGrid-root makeStyles-margin-4 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-10 MuiGrid-grid-md-8 MuiGrid-grid-lg-6"
+    >
+      <ul
+        class="MuiList-root makeStyles-root-178 MuiList-padding"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8"
+          >
+            <div>
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  added ticket
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+          >
+            <div>
+              <div
+                class="MuiFormControl-root makeStyles-formControl-216"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+                  data-shrink="false"
+                  id="simple-select-label"
+                >
+                  Sort by:
+                </label>
+                <div
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+                >
+                  <div
+                    aria-haspopup="listbox"
+                    aria-labelledby="select-label demo-simple-select"
+                    class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input MuiInputBase-inputSelect"
+                    id="demo-simple-select"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <span>
+                      ​
+                    </span>
+                  </div>
+                  <input
+                    type="hidden"
+                    value=""
+                  />
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSelect-icon"
+                    focusable="false"
+                    role="presentation"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="makeStyles-root-296"
+        >
+          <div
+            class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+            role="progressbar"
+            style="width: 40px; height: 40px;"
+          >
+            <svg
+              class="MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="20.2"
+                stroke-width="3.6"
+              />
+            </svg>
+          </div>
+        </div>
+        <div />
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
+`;
