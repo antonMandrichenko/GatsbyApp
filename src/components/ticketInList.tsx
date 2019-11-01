@@ -38,6 +38,7 @@ type TicketInListProps = {
   updateTicket: Function
   setTicketId: Function
   setCompleted: Function
+  assignUser: Function
 }
 
 export default function TicketInList({
@@ -46,7 +47,8 @@ export default function TicketInList({
   deleteTicket,
   updateTicket,
   setTicketId,
-  setCompleted
+  setCompleted,
+  assignUser
 }: TicketInListProps) {
   const classes = useStyles()
 
@@ -75,7 +77,7 @@ export default function TicketInList({
               {ticket.description}
             </Typography>
           </CardContent>
-          <SelectAssign assignedId={ticket.assigneeId} users={users} />
+          <SelectAssign assignedId={ticket.assigneeId} users={users} assignUser={assignUser}/>
           <CompletedTicket setCompleted={setCompleted} id={ticket.id} completed={ticket.completed}/>
           <CardActions>
             <Link to="/ticket">

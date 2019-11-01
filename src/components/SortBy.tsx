@@ -8,7 +8,6 @@ import { sortArrayByNameUp, sortArrayByNameDown } from "../utils/sort"
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(1),
     minWidth: 120,
   },
   selectEmpty: {
@@ -24,9 +23,9 @@ export default function SortBy({ sortBy }: SortByTypes) {
   const classes = useStyles()
   const [value, setValue] = React.useState("")
 
-  const handleChange = event => {
-    setValue(event.target.value)
-    sortBy(event.target.value === 10 ? sortArrayByNameUp : sortArrayByNameDown)
+  const handleChange = (e: React.MouseEvent<HTMLElement>) => {
+    setValue(e.target.value)
+    sortBy(e.target.value === 10 ? sortArrayByNameUp : sortArrayByNameDown)
   }
 
   return (

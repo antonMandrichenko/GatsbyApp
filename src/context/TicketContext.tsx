@@ -41,76 +41,124 @@ function TicketProvider(props: Props) {
   const [selectedTicket, setSelectedTicket] = useState<ticketsTypes | null>(
     null
   )
+  const [isError, setIsError] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   const getDataFromApi = async () => {
     setIsLoading(true)
-    const ticketsData = await backend.tickets()
-    const usersData = await backend.users()
-    if (ticketsData && usersData) {
-      setIsLoading(false)
+    try {
+      const ticketsData = await backend.tickets()
+      const usersData = await backend.users()
+      if (ticketsData && usersData) {
+        setIsLoading(false)
+      }
+      setTickets(ticketsData)
+      setUsers(usersData)
+    } catch (err) {
+      setIsError(true)
+      setErrorMessage(err.message)
     }
-    setTickets(ticketsData)
-    setUsers(usersData)
   }
 
   useEffect(() => {
     getDataFromApi()
   }, [])
 
-  const deleteTicket = async (id: number) => {
-    setTickets(tickets.filter(ticket => ticket.id !== id))
+  useEffect(() => {
+    setTimeout(() => {
+      setIsError(false)
+      setErrorMessage("")
+    }, 5000)
+  }, [isError])
+
+  const setError =(message: string) => {
+    setIsError(true)
+    setErrorMessage(message)
   }
 
+
+  const deleteTicket = (id: number) => {
+    try {
+      setTickets(tickets.filter(ticket => ticket.id !== id))
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
+  
   const addTicket = async (opt: Pick<Ticket, "description">) => {
-    setIsLoading(true)
-    await backend.newTicket(opt)
-    setIsLoading(false)
-    console.log("added")
-    getDataFromApi()
+    try {
+      setIsLoading(true)
+      await backend.newTicket(opt)
+      setIsLoading(false)
+      console.log("added")
+      getDataFromApi()
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   const updateTicket = (opt: Ticket) => {
     if (opt.description === "") {
       return
     }
-    const findTicket = tickets.find(ticket => ticket.id === opt.id)
-    if (findTicket) {
-      findTicket.description = opt.description
-      setTickets(
-        tickets.map(ticket => {
-          if (ticket.id === findTicket.id) {
-            return findTicket
-          }
-          return ticket
-        })
-      )
+    try {
+      const findTicket = tickets.find(ticket => ticket.id === opt.id)
+      if (findTicket) {
+        findTicket.description = opt.description
+        setTickets(
+          tickets.map(ticket => {
+            if (ticket.id === findTicket.id) {
+              return findTicket
+            }
+            return ticket
+          })
+        )
+      }
+    } catch (err) {
+      setError(err.message)
     }
   }
 
   const setTicketId = (ticket: ticketsTypes) => {
-    setSelectedTicket(ticket)
-    console.log(tickets)
+    try {
+      setSelectedTicket(ticket)
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   const setCompleted = async (opt: ticketsTypes) => {
-    await backend.complete(opt)
-    const findTicket = tickets.find(ticket => ticket.id === opt.id)
-    if (findTicket) {
-      findTicket.completed = opt.completed
-      setTickets(
-        tickets.map(ticket => {
-          if (ticket.id === findTicket.id) {
-            return findTicket
-          }
-          return ticket
-        })
-      )
+    try {
+      await backend.complete(opt)
+      const findTicket = tickets.find(ticket => ticket.id === opt.id)
+      if (findTicket) {
+        findTicket.completed = opt.completed
+        setTickets(
+          tickets.map(ticket => {
+            if (ticket.id === findTicket.id) {
+              return findTicket
+            }
+            return ticket
+          })
+        )
+      }
+    } catch (err) {
+      setError(err.message)
     }
   }
 
   const sortBy = (callback: Function) => {
-    const sortArr = tickets.sort(callback).map((item:ticketsTypes) => item)
-    setTickets(sortArr)
+    try {
+      const sortArr = tickets.sort(callback).map((item: ticketsTypes) => item)
+      setTickets(sortArr)
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
+  const assignUser = (userId: number) => {
+    console.log(userId)
   }
 
   return (
@@ -126,6 +174,9 @@ function TicketProvider(props: Props) {
         setTicketId,
         setCompleted,
         sortBy,
+        assignUser,
+        isError,
+        errorMessage,
       }}
     >
       {children}
