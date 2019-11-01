@@ -39,6 +39,7 @@ function TicketProvider(props: Props) {
   const [tickets, setTickets] = useState<ticketsTypes[]>([])
   const [users, setUsers] = useState<usersTypes[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [selectedTicket, setSelectedTicket] = useState<ticketsTypes | null>(null)
 
   const getDataFromApi = async () => {
     setIsLoading(true)
@@ -85,6 +86,27 @@ function TicketProvider(props: Props) {
     }
   }
 
+  const setTicketId = (ticket: ticketsTypes) => {
+    console.log("setId")
+    setSelectedTicket(ticket)
+  }
+
+  const setCompleted = async (opt: ticketsTypes) => {
+    console.log("completed", opt)
+    await backend.complete(opt)
+    const findTicket = tickets.find(ticket => ticket.id === opt.id)
+    if(findTicket) {
+      findTicket.completed = opt.completed
+      setTickets(tickets.map(ticket => {
+        if(ticket.id === findTicket.id) {
+          return findTicket;
+        }
+        return ticket;
+      }))
+    }
+    console.log(tickets)
+  }
+
   return (
     <TicketContext.Provider
       value={{
@@ -93,7 +115,10 @@ function TicketProvider(props: Props) {
         isLoading,
         deleteTicket,
         addTicket,
-        updateTicket
+        updateTicket,
+        selectedTicket,
+        setTicketId,
+        setCompleted
       }}
     >
       {children}

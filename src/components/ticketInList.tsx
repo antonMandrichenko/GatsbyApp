@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton"
 import SelectAssign from "../components/SelectAssign"
 import IconsButton from "../components/IconsButton"
 import UpdateTicket from "./UpdateTicket"
+import CompletedTicket from "./CompletedTicket"
 import { ticketsTypes, usersTypes } from "../context/TicketContext"
 
 const useStyles = makeStyles({
@@ -35,13 +36,17 @@ type TicketInListProps = {
   users: Array<usersTypes>
   deleteTicket: Function
   updateTicket: Function
+  setTicketId: Function
+  setCompleted: Function
 }
 
 export default function TicketInList({
   ticket,
   users,
   deleteTicket,
-  updateTicket
+  updateTicket,
+  setTicketId,
+  setCompleted
 }: TicketInListProps) {
   const classes = useStyles()
 
@@ -71,9 +76,17 @@ export default function TicketInList({
             </Typography>
           </CardContent>
           <SelectAssign assignedId={ticket.assigneeId} users={users} />
+          <CompletedTicket setCompleted={setCompleted} id={ticket.id} completed={ticket.completed}/>
           <CardActions>
             <Link to="/ticket">
-              <Button size="small" variant="contained" color="primary">
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setTicketId(ticket)
+                }}
+              >
                 About ticket
               </Button>
             </Link>

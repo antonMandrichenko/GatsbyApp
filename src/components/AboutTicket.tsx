@@ -28,50 +28,63 @@ export default function AboutTicket() {
 
   return (
     <TicketContext.Consumer>
-      {({ tickets, isLoading, users, selectedTicketId }) => (
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography
-              variant="h4"
-              component="h3"
-              color="primary"
-              gutterBottom
-            >
-              <b>Ticket description:</b> {"jkdvhkdjbjvbj"}
-            </Typography>
-            <Typography
-              variant="h5"
-              component="h3"
-              color="textSecondary"
-              gutterBottom
-            >
-              <b>Completed:</b> {"jkdvhkdjbjvbj"}
-            </Typography>
-            <Typography
-              variant="h5"
-              component="h3"
-              color="textSecondary"
-              gutterBottom
-            >
-              <b>Number:</b> {"444"}
-            </Typography>
-            <Typography
-              variant="h5"
-              component="h3"
-              color="textSecondary"
-              gutterBottom
-            >
-              <b>Assigned user:</b> {"Loflflfl"}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Link to="/">
-              <Button size="small" variant="contained" color="primary">
-                To tickets list
-              </Button>
-            </Link>
-          </CardActions>
-        </Card>
+      {({ selectedTicket }) => (
+        <React.Fragment>
+          <Card className={classes.card}>
+            {!selectedTicket ? (
+              <Typography
+                variant="h4"
+                component="h3"
+                color="secondary"
+                gutterBottom
+              >
+                <b>No choose ticket</b>
+              </Typography>
+            ) : (
+              <CardContent>
+                <Typography
+                  variant="h4"
+                  component="h3"
+                  color="primary"
+                  gutterBottom
+                >
+                  <b>Ticket description:</b> {selectedTicket.description}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component="h3"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  <b>Completed:</b> {selectedTicket.completed ? "yes" : "no"}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component="h3"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  <b>Number:</b> {selectedTicket.id}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component="h3"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  <b>Assigned user:</b> {selectedTicket.assigneeId}
+                </Typography>
+              </CardContent>
+            )}
+            <CardActions>
+              <Link to="/">
+                <Button size="small" variant="contained" color="primary">
+                  To tickets list
+                </Button>
+              </Link>
+            </CardActions>
+          </Card>
+        </React.Fragment>
       )}
     </TicketContext.Consumer>
   )

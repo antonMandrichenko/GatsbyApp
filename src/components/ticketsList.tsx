@@ -36,6 +36,8 @@ export default function TicketsList() {
         deleteTicket,
         addTicket,
         updateTicket,
+        setTicketId,
+        setCompleted
       }) => (
         <List className={classes.root}>
           <UpdateTicket
@@ -55,6 +57,8 @@ export default function TicketsList() {
                     users={users}
                     deleteTicket={deleteTicket}
                     updateTicket={updateTicket}
+                    setTicketId={setTicketId}
+                    setCompleted={setCompleted}
                   />
                 </ListItem>
               )
