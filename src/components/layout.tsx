@@ -30,7 +30,7 @@ type Props = {
   children: object
 }
 
-function Layout(props: Props) {
+export default function Layout(props: Props) {
   const { children } = props
   const classes = useStyles()
   return (
@@ -52,4 +52,3 @@ function Layout(props: Props) {
     </React.Fragment>
   )
 }
-export default Layout

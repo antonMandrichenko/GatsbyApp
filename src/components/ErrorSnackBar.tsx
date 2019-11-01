@@ -26,7 +26,14 @@ const useStyles1 = makeStyles(theme => ({
   },
 }));
 
-function MySnackbarContentWrapper(props) {
+type MySnackbarContentWrapper = {
+    className: object
+    message: string
+    onClose: Function
+    variant: string
+}
+
+function MySnackbarContentWrapper(props: MySnackbarContentWrapper) {
   const classes = useStyles1();
   const { className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];

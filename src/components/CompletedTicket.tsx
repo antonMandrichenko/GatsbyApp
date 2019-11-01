@@ -12,7 +12,7 @@ type CompletedTicketTypes = {
 export default function CompletedTicket({setCompleted, id, completed}: CompletedTicketTypes) {
   const [value, setValue] = React.useState(completed);
 
-  const handleChange = e => {
+  const handleChange = (e: React.MouseEvent<HTMLElement>) => {
     setValue(e.target.checked);
     setCompleted({completed:e.target.checked, ticketId: id })
   };
