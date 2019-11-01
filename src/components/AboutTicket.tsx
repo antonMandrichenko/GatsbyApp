@@ -19,11 +19,18 @@ const useStyles = makeStyles(theme => ({
 export default function AboutTicket() {
   const classes = useStyles()
 
-  const TypograthyList = (message: JSX.Element, color: string, variant: string) => (
-    <Typography variant={variant} component="h3" color={color} gutterBottom>
-      {message}
-    </Typography>
-  )
+  const TypograthyList: React.SFC<{
+    message: JSX.Element
+    color: string
+    variant: string
+  }> = (message, color, variant) => {
+    return (
+      <Typography variant={variant} component="h3" color={color} gutterBottom>
+        {message}
+      </Typography>
+    )
+  }
+
   return (
     <TicketContext.Consumer>
       {({ selectedTicket }) => (

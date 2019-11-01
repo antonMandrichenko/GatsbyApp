@@ -21,11 +21,16 @@ const useStyles = makeStyles(theme => ({
 export default function TicketsList() {
   const classes = useStyles()
 
-  const addedButton = (text: string, callback: Function) => (
-    <Button variant="contained" color="secondary" onClick={callback}>
-      {text}
-    </Button>
-  )
+  const addedButton: React.SFC<{
+    text: string
+    callback: Function
+  }> = ( text, callback ) => {
+    return (
+      <Button variant="contained" color="secondary" onClick={callback}>
+        {text}
+      </Button>
+    )
+  }
 
   return (
     <TicketContext.Consumer>
