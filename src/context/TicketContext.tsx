@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { BackendService } from "../../backend.service"
+import { BackendService, Ticket } from "../../backend.service"
+
 
 const backend = new BackendService()
 
@@ -60,12 +61,28 @@ function TicketProvider(props: Props) {
     console.log("ticket deleted")
   }
 
-  const addTicket = async (opt: object) => {
+  const addTicket = async (opt: Pick<Ticket, 'description'>) => {
     setIsLoading(true)
     await backend.newTicket(opt)
     setIsLoading(false)
     console.log("added")
     getDataFromApi()
+  }
+
+  const updateTicket = (opt: Ticket) => {
+    if(opt.description === "") {
+      return;
+    }
+    const findTicket = tickets.find(ticket => ticket.id === opt.id)
+    if(findTicket) {
+      findTicket.description = opt.description
+      setTickets(tickets.map(ticket => {
+        if(ticket.id === findTicket.id) {
+          return findTicket;
+        }
+        return ticket;
+      }))
+    }
   }
 
   return (
@@ -76,6 +93,7 @@ function TicketProvider(props: Props) {
         isLoading,
         deleteTicket,
         addTicket,
+        updateTicket
       }}
     >
       {children}

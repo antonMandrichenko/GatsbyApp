@@ -17,7 +17,7 @@ const ticketsDb = [
 ]
 const usersDb = [{ id: 111, name: 'Julie' }, { id: 222, name: 'Hank' }, { id: 333, name: 'Al' }]
 
-type Ticket = typeof ticketsDb[0]
+export type Ticket = typeof ticketsDb[0]
 
 type NewTicket = Pick<Ticket, 'description'>
 type TicketId = Pick<Ticket, 'id'>

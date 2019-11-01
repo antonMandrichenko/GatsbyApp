@@ -2,10 +2,14 @@ import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
+import Button from "@material-ui/core/Button"
 import TicketInList from "./ticketInList"
-import TicketContext from "../context/TicketContext"
+import TicketContext, {
+  usersTypes,
+  ticketsTypes,
+} from "../context/TicketContext"
 import LoadingData from "./LoadingData"
-import AddTicket from "./addTicket"
+import UpdateTicket from "./UpdateTicket"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,21 +21,40 @@ const useStyles = makeStyles(theme => ({
 export default function TicketsList() {
   const classes = useStyles()
 
+  const addedButton = (text: string, callback: Function) => (
+    <Button variant="contained" color="secondary" onClick={callback}>
+      {text}
+    </Button>
+  )
+
   return (
     <TicketContext.Consumer>
-      {({ tickets, isLoading, users, deleteTicket, addTicket }) => (
+      {({
+        tickets,
+        isLoading,
+        users,
+        deleteTicket,
+        addTicket,
+        updateTicket,
+      }) => (
         <List className={classes.root}>
-          <AddTicket addTicket={addTicket} isLoading={isLoading}/>
-          {isLoading && !tickets && !users ? (
+          <UpdateTicket
+            callback={addTicket}
+            isLoading={isLoading}
+            text="added"
+            addedButton={addedButton}
+          />
+          {(isLoading && !tickets.length) ? (
             <LoadingData />
           ) : (
-            tickets.map(ticket => {
+            tickets && tickets.map(ticket => {
               return (
                 <ListItem key={ticket.id}>
                   <TicketInList
                     ticket={ticket}
                     users={users}
                     deleteTicket={deleteTicket}
+                    updateTicket={updateTicket}
                   />
                 </ListItem>
               )

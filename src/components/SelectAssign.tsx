@@ -23,10 +23,12 @@ export default function SelectAssign({ assignedId, users }: SelectAssignTypes) {
   const classes = useStyles()
   const assignedUser = users.filter(user => user.id === assignedId)[0]
   console.log(assignedUser)
-  const [personName, setPersonName] = React.useState(assignedUser ? assignedUser.name : "")
+  const [personName, setPersonName] = React.useState(
+    assignedUser ? assignedUser.name : ""
+  )
 
-  const handleChange = (event: React.MouseEvent<HTMLElement>) => {
-    setPersonName(event.target.value)
+  const handleChange = (e: React.MouseEvent<HTMLElement>) => {
+    setPersonName(e.target.value)
   }
 
   return (
@@ -37,7 +39,9 @@ export default function SelectAssign({ assignedId, users }: SelectAssignTypes) {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={personName}
-          onChange={handleChange}
+          onChange={e => {
+            handleChange(e)
+          }}
         >
           {users.map(user => (
             <MenuItem key={user.id} value={user.name}>

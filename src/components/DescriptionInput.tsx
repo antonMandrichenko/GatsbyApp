@@ -14,7 +14,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function DescriptionInput({enterText}) {
+type DescriptionInputTypes = {
+  enterText: Function
+  value: string
+}
+
+export default function DescriptionInput({enterText, value}: DescriptionInputTypes) {
   const classes = useStyles();
 
   return (
@@ -23,6 +28,7 @@ export default function DescriptionInput({enterText}) {
         className={classes.margin}
         id="input-with-icon-textfield"
         label="TextField"
+        defaultValue={value}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
