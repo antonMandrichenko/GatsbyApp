@@ -1,15 +1,13 @@
 import React from "react"
-import Layout from "../components/layout"
-import TicketsList from "../components/ticketsList"
+import Layout from "../components/Layout"
+import List from "../components/List"
 
-const IndexPage = () => {
+const LastPage = () => {
   return (
-    <>
-      <Layout>
-        <TicketsList />
-      </Layout>
-    </>
+    <Layout>
+      <List />
+    </Layout>
   )
 }
 
-export default IndexPage
+export default LastPage

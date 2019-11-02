@@ -1,6 +1,6 @@
 import React from "react"
-import { TicketProvider } from "./src/context/TicketContext"
+import { AppProvider } from "./src/context/AppContext"
 
 export const wrapRootElement = ({ element }) => (
-  <TicketProvider>{element} </TicketProvider>
+  <AppProvider>{element}</AppProvider>
 )

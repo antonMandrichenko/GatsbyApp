@@ -1,11 +1,9 @@
 import React from "react"
-import AboutTicket from "../components/AboutTicket"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 const TicketDetails = () => (
   <Layout>
-    <AboutTicket />
   </Layout>
 )
 
