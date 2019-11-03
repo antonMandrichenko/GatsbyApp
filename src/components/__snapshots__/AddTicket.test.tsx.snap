@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddTicket /> cgetSnapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-229 MuiButton-containedSecondary MuiButton-fullWidth"
+      data-testid="button-first"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Create list item
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <div
+      class="makeStyles-alert-230"
+    />
+  </div>
+</DocumentFragment>
+`;

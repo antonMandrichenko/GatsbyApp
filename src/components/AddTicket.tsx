@@ -46,6 +46,7 @@ const AddTicket: React.FC = () => {
         fullWidth
         onClick={handleClick}
         disabled={disable || loadingData}
+        data-testid="button-first"
       >
         Create list item
       </Button>
@@ -57,6 +58,8 @@ const AddTicket: React.FC = () => {
             onChange={(e: React.ChangeEvent<Element>) => {
               setText(e.target.value)
             }}
+            data-testid="text"
+            
           />
           <Button
             variant="contained"
@@ -66,6 +69,7 @@ const AddTicket: React.FC = () => {
             onClick={() => {
               closeMenu(description)
             }}
+            data-testid="button-second"
           >
             {!description ? "Close" : "Add item to list"}
           </Button>
