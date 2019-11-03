@@ -29,6 +29,7 @@ interface defaultContextTypes {
   getTicket: Function
   ticket: ticketsTypes
   user: usersTypes
+  clearError: Function
 }
 
 const AppContext = React.createContext({} as defaultContextTypes)
@@ -124,6 +125,10 @@ const AppProvider: React.FC = ({ children }) => {
     }
   }
 
+  const clearError = () => {
+    setError({ isError: false, message: ""})
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -139,6 +144,7 @@ const AppProvider: React.FC = ({ children }) => {
         getTicket,
         ticket,
         user,
+        clearError
       }}
     >
       {children}

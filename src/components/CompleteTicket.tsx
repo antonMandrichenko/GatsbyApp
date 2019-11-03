@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import Checkbox from "@material-ui/core/Checkbox"
 import AppContext from "../context/AppContext"
 
-const CompleteTicket: React.FC = ({ ticket }: any) => {
+const CompleteTicket: React.FC<any> = ({ ticket }) => {
   const { setCompleteTicket, loadingData } = useContext(AppContext)
 
   return (

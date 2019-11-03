@@ -22,7 +22,7 @@ const AddTicket: React.FC = () => {
   const [disable, setDisable] = React.useState(false)
   const [description, setText] = React.useState("")
   const container = React.useRef(null)
-  const { loadingData, addedTicketToList } = useContext(AppContext)
+  const { addedTicketToList, loadingData } = useContext(AppContext)
 
   const handleClick = () => {
     setShow(!show)
@@ -45,7 +45,7 @@ const AddTicket: React.FC = () => {
         className={classes.button}
         fullWidth
         onClick={handleClick}
-        disabled={disable}
+        disabled={disable || loadingData}
       >
         Create list item
       </Button>

@@ -1,9 +1,7 @@
-import React, { useContext } from "react"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Grid from "@material-ui/core/Grid"
 import Paper from "@material-ui/core/Paper"
-
-import AppContext from "../context/AppContext"
 import OneTicketList from "./OneTicketList"
 import AddTicket from "./AddTicket"
 import FilterTickets from "./FilterTickets"
@@ -19,9 +17,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function List() {
+const List: React.FC = () => {
   const classes = useStyles()
-  const { loadingData } = useContext(AppContext)
 
   return (
     <React.Fragment>
@@ -45,3 +42,5 @@ export default function List() {
     </React.Fragment>
   )
 }
+
+export default List

@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const AssignUser: React.FC = ({ ticket }: any) => {
+const AssignUser: React.FC<any> = ({ ticket }) => {
   const classes = useStyles()
   const [age, setAge] = React.useState("")
   const [open, setOpen] = React.useState(false)
@@ -53,11 +53,14 @@ const AssignUser: React.FC = ({ ticket }: any) => {
             id: "open-select",
           }}
         >
-          {users.map(user => (
-            <MenuItem key={user.id} value={user.id}>
-              {user.name}
-            </MenuItem>
-          ))}
+          {users.map(
+            user =>
+              user && (
+                <MenuItem key={user.id} value={user.id}>
+                  {user.name}
+                </MenuItem>
+              )
+          )}
         </Select>
       </FormControl>
     </form>
