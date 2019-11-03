@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Portal from "@material-ui/core/Portal"
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
+import AppContext from "../context/AppContext"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -15,15 +16,25 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function AddTicket() {
+const AddTicket: React.FC = () => {
   const classes = useStyles()
   const [show, setShow] = React.useState(false)
   const [disable, setDisable] = React.useState(false)
+  const [description, setText] = React.useState("")
   const container = React.useRef(null)
+  const { loadingData, addedTicketToList } = useContext(AppContext)
 
   const handleClick = () => {
     setShow(!show)
     setDisable(!disable)
+  }
+
+  const closeMenu = (description: string) => {
+    setShow(false)
+    setDisable(false)
+    if (description) {
+      addedTicketToList({ description })
+    }
   }
 
   return (
@@ -40,15 +51,23 @@ export default function AddTicket() {
       </Button>
       {show ? (
         <Portal container={container.current}>
-          <TextField id="standard-disabled" label="Description" />
+          <TextField
+            id="standard-disabled"
+            label="Description"
+            onChange={(e: React.ChangeEvent<Element>) => {
+              setText(e.target.value)
+            }}
+          />
           <Button
             variant="contained"
             color="secondary"
             className={classes.button}
             fullWidth
-            onClick={handleClick}
+            onClick={() => {
+              closeMenu(description)
+            }}
           >
-            Add item to list
+            {!description ? "Close" : "Add item to list"}
           </Button>
         </Portal>
       ) : null}
@@ -56,3 +75,5 @@ export default function AddTicket() {
     </div>
   )
 }
+
+export default AddTicket
